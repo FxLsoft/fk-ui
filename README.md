@@ -1,4 +1,19 @@
 ## ERP_LIB 前端基座说明
+该项目是基于vue3+ts开发的极致性能的组件。
+
+基础组件70+
+
+图标组件100+
+
+业务组件20+
+
+基本满足平台的所有业务需求。
+
+主要涉及技术 vue3 + ts + less + node。
+
+![image](./img/input.jpg)
+
+![image](./img/table.jpg)
 
 ### 依赖安装
 
