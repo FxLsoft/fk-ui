@@ -35,7 +35,7 @@ const pub = (tag: string) => {
 	if (tag) {
 		cmd += ` --tag=${tag}`;
 	}
-	cmd += ' --registry http://8.148.7.251:4873/';
+	cmd += ' --registry http://*.*.*.*:8080/';
 	console.log('正在发布版本...', cmd);
 	const worker = cp.exec(cmd, (error, stdout, stderr) => {
 		consola.log(`stdout: ${stdout}`);
