@@ -1,0 +1,33 @@
+{
+	"cSpell.words": ["autowire", "Autowired", "fxlsoft", "Popconfirm", "sider", "vnode"],
+	"typescript.tsdk": "node_modules/typescript/lib",
+	// "editor.formatOnSave": true,
+	"npm.packageManager": "pnpm",
+	"eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown", "json", "jsonc"],
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown", "json", "jsonc"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnType": false, // required
+	"editor.formatOnPaste": false, // optional
+	"editor.formatOnSave": false, // optional
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"files.autoSave": "onFocusChange", // optional but recommended
+	"vs-code-prettier-eslint.prettierLast": false,
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		// "editor.defaultFormatter": "esbenp.prettier-vscode"
+	}, // set as "true" to run 'prettier' last not first
+	"[markdown]": {
+		"editor.formatOnPaste": false, // optional
+		"editor.formatOnSave": false, // optional
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}

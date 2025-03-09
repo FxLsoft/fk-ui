@@ -1,0 +1,44 @@
+{
+	"name": "@erp/icons",
+	"version": "0.0.3",
+	"description": "ERP平台业务ICONS组件库",
+	"license": "MIT",
+	"author": "erp-lib@group",
+	"files": [
+		"dist",
+		"types"
+	],
+	"main": "./index.ts",
+	"module": "./index.ts",
+	"publishConfig": {
+		"registry": "http://8.148.7.251:4873/",
+		"main": "./dist/icons.mjs",
+		"module": "./dist/icons.mjs",
+		"typings": "./dist/typings/index.d.ts"
+	},
+	"scripts": {
+		"build": "erp-cli lib -T icons && npm run dtsgen",
+		"docgen": "erp-cli docgen",
+		"dtsgen": "erp-cli dtsgen './**/*.{ts,tsx,vue}' -o dist/typings",
+		"icongen": "erp-cli icongen",
+		"clean": "rimraf dist",
+		"pub": "erp-cli pub"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@erp/cli": "workspace:*",
+		"@erp/common": "workspace:*",
+		"@rollup/plugin-replace": "~5.0.7",
+		"@vitejs/plugin-vue": "5.2.1",
+		"@vitejs/plugin-vue-jsx": "4.1.1",
+		"@vue/compiler-sfc": "3.5.13",
+		"rimraf": "6.0.1",
+		"rollup-plugin-copy": "~3.4.0",
+		"sass": "~1.83.4",
+		"ts-morph": "~23.0.0",
+		"vite": "~6.1.0",
+		"vue": "3.5.13",
+		"vue-router": "~4.4.5",
+		"vue-tsc": "~2.1.10"
+	}
+}

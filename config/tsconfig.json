@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"skipLibCheck": true,
+		"alwaysStrict": false,
+		"strictNullChecks": false,
+		"strictBindCallApply": false,
+		"strictFunctionTypes": false,
+		"declaration": true,
+		"target": "es2015",
+		"module": "esnext",
+		"strict": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"strictPropertyInitialization": false,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": false,
+		"removeComments": false,
+		"sourceMap": true,
+		"lib": ["es2015", "esnext", "dom"],
+		"paths": {
+			"@vue/shared": ["./node_modules/@vue/shared"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

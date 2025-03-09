@@ -1,0 +1,26 @@
+{
+	"extends": "../../config/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"jsx": "preserve",
+		"outDir": "es",
+		"target": "ES2015",
+		"module": "ES2020",
+		"moduleResolution": "node",
+		"removeComments": false,
+		"strict": true,
+		"allowJs": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noImplicitAny": false,
+		"importHelpers": true,
+		"sourceMap": true,
+		"paths": {
+			"@vue/shared": ["./node_modules/@vue/shared"]
+		},
+		"lib": ["ES2020", "DOM"],
+		"types": ["../global", "csstype", "dayjs", "compute-scroll-into-view"]
+	},
+	"include": ["components"],
+	"exclude": ["es", "dist", "lib", "node_modules"]
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+
+		<title>ERP管理平台</title>
+		<link rel="icon" type="image/svg+xml" href="./logo/logo.svg" />
+		<base href="./" />
+		<style>
+			html,
+			body {
+				font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			#app {
+				height: 100%;
+				width: 100%;
+			}
+			.home-loading {
+				font-size: 14px;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #09453c;
+				flex-direction: column;
+			}
+			.home-loading img {
+				width: 48px;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="home-loading">
+				<img src="./logo/logo.svg" alt="logo" />
+				<span>Loading...</span>
+			</div>
+		</div>
+		<script>
+			var version = '__VERSION__';
+			if ('serviceWorker' in navigator && /\d/g.test(version)) {
+				fetch('./version')
+					.then(function (res) {
+						return res.text();
+					})
+					.then(function (newVersion) {
+						if (+newVersion > +version) {
+							init(newVersion);
+						}
+					});
+			}
+			function init(newVersion) {
+				console.log('新版本号', newVersion);
+				window.addEventListener('load', function () {
+					navigator.serviceWorker
+						.register('./sw.js?_=' + newVersion)
+						.then(function (res) {
+							console.log('Start SW success!');
+						})
+						.catch(function (error) {
+							console.log('Start SW fail!');
+						});
+				});
+			}
+		</script>
+		<script type="module" src="./src/main.ts"></script>
+	</body>
+</html>

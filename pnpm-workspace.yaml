@@ -1,0 +1,9 @@
+packages:
+    # 主要项目
+    - 'packages/**'
+	# 项目内部提效、提质项目
+    - 'internal/**'
+    # 排除test目录
+    - '!**/test/**'
+	# 基座文档项目
+    - docs

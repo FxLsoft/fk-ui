@@ -1,0 +1,84 @@
+```yaml
+title:
+  zh-CN: 允许清除
+  en-US: Allow Clear
+```
+
+
+允许清除。
+
+---
+
+
+```vue { "component": true } 
+<template>
+  <fk-cascader
+v-model="value" :options="options" tag-nowrap :style="{width:'320px'}" placeholder="Please select ..."
+              allow-clear />
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const value = ref('datunli');
+
+    const options = [
+      {
+        value: 'beijing',
+        label: 'Beijing',
+        children: [
+          {
+            value: 'chaoyang',
+            label: 'ChaoYang',
+            children: [
+              {
+                value: 'datunli',
+                label: 'Datunli',
+              },
+            ],
+          },
+          {
+            value: 'haidian',
+            label: 'Haidian',
+          },
+          {
+            value: 'dongcheng',
+            label: 'Dongcheng',
+          },
+          {
+            value: 'xicheng',
+            label: 'Xicheng',
+            children: [
+              {
+                value: 'jinrongjie',
+                label: 'Jinrongjie',
+              },
+              {
+                value: 'tianqiao',
+                label: 'Tianqiao',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        value: 'shanghai',
+        label: 'Shanghai',
+        children: [
+          {
+            value: 'huangpu',
+            label: 'Huangpu',
+          },
+        ],
+      },
+    ];
+    return {
+      value,
+      options
+    }
+  },
+}
+</script>
+```

@@ -1,0 +1,95 @@
+{
+	"name": "erp-lib",
+	"version": "1.0.0",
+	"private": true,
+	"description": "路特斯ERP平台前端公共库项目",
+	"keywords": [
+		"ERP前端基座项目"
+	],
+	"license": "MIT",
+	"author": "fxlsoft",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git@codeup.aliyun.com:6627798cd833774c93cc0790/erp_lib.git"
+	},
+	"scripts": {
+		"cz": "git-cz",
+		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+		"dev": "cd packages/main-front && npm run dev",
+		"build": "cd packages/main-front && npm run build",
+		"serve": "vite preview --port 8080 --host 0.0.0.0 --https",
+		"format": "prettier --write .",
+		"lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.json --max-warnings 0 && pretty-quick --check --branch dev",
+		"lint:fix": "eslint --fix . --ext .vue,.js,.ts,.jsx,.tsx,.json && pretty-quick --branch dev",
+		"prepare": "husky install",
+		"dev:docs": "cd docs && npm run dev",
+		"build:docs": "cd docs && npm run build",
+		"preview:docs": "cd docs && npm run preview",
+		"build:cli": "cd internal/cli && npm run build",
+		"build:common": "cd packages/common && npm run build",
+		"fix-memory-limit": "npx cross-env LIMIT=8192 increase-memory-limit"
+	},
+	"dependencies": {
+		"dayjs": "^1.10.7",
+		"lodash-es": "^4.17.21",
+		"vue": "3.5.13"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^16.2.3",
+		"@commitlint/config-conventional": "^16.2.1",
+		"@erp/eslint-config": "workspace:*",
+		"@types/lodash-es": "^4.17.6",
+		"@types/node": "22.2.0",
+		"@vitejs/plugin-vue": "5.2.1",
+		"@vitejs/plugin-vue-jsx": "4.1.1",
+		"@vue/shared": "~3.3.13",
+		"consola": "^2.15.3",
+		"conventional-changelog-cli": "^2.1.1",
+		"cross-env": "^7.0.3",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "~8.52.0",
+		"eslint-define-config": "^1.3.0",
+		"git-cz": "^4.8.0",
+		"husky": "^7.0.4",
+		"increase-memory-limit": "^1.0.3",
+		"lint-staged": "^12.3.8",
+		"prettier": "~3.1.0",
+		"prettier-eslint": "~16.3.0",
+		"pretty-quick": "~4.0.0",
+		"terser": "~5.31.6",
+		"tslib": "~2.3.1",
+		"typescript": "5.6.3",
+		"unplugin-vue-define-options": "~1.4.9",
+		"vite": "~6.1.0",
+		"vitest": "~3.0.5",
+		"vue-eslint-parser": "~9.4.3",
+		"vue-router": "^4.2.4",
+		"vuedraggable": "^4.1.0"
+	},
+	"engines": {
+		"node": ">=14",
+		"npm": ">=6.14",
+		"yarn": ">=1.22"
+	},
+	"workspaces": [
+		"packages/*",
+		"internal/*"
+	],
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"lint-staged": {
+		"*.{vue,js,ts,jsx,tsx,json}": "eslint --fix --quiet"
+	},
+	"pnpm": {
+		"peerDependencyRules": {
+			"ignoreMissing": [
+				"@algolia/client-search",
+				"search-insights"
+			]
+		}
+	}
+}

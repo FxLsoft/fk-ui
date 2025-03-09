@@ -1,0 +1,26 @@
+{
+	"extends": "../../config/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "es",
+		"target": "ES2015",
+		"module": "ES2020",
+		"moduleResolution": "node",
+		"removeComments": false,
+		"strict": true,
+		"allowJs": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noImplicitAny": false,
+		"importHelpers": true,
+		"jsx": "preserve",
+		"paths": {
+			"@vue/shared": ["./node_modules/@vue/shared"],
+			"@/*": ["./*"]
+		},
+		"lib": ["ES2020", "ES2022", "DOM"],
+		"types": ["../global", "./types"]
+	},
+	"include": ["components", "grid-table"],
+	"exclude": ["es", "dist", "lib", "node_modules"]
+}

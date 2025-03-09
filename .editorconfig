@@ -1,0 +1,15 @@
+# editorconfig.org
+root = true
+
+[*]
+charset = utf-8 				# 编码
+indent_style = tab  			# 设置缩进风格
+indent_size = 4					# 缩进的宽度，即列数，整数。
+end_of_line = lf				# 换行符
+trim_trailing_whitespace = true	# 设为true表示会除去换行行首的任意空白字符
+insert_final_newline = true		# 设为true表明使文件以一个空白行结尾
+
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2					# 缩进的宽度，即列数，整数。

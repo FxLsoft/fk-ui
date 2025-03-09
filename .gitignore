@@ -1,0 +1,42 @@
+.DS_Store
+*/.DS_Store
+node_modules
+node_modules/
+package-lock.json
+dist
+dist.zip
+dist/
+.temp
+packages/**/node_modules
+packages/**/package-lock.json
+internal/**/package-lock.json
+**/.vitepress/cache/**
+# lock fiels
+yarn.lock
+
+# pnpm fiels
+pnpm-lock.yaml
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# icon
+packages/common/icon/icons.json
+packages/common/components/icon
+packages/common/es
+packages/common/lib

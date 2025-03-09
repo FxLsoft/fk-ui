@@ -1,0 +1,11 @@
+node_modules
+dist
+!.*
+.prettierrc
+packages/**/node_modules
+internal/**/node_modules
+**/node_modules
+packages/common/icon/icons.json
+packages/common/components/icon
+packages/common/es
+packages/common/lib

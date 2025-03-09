@@ -1,0 +1,232 @@
+<template>
+	<Trigger
+		:class="prefixCls"
+		trigger="hover"
+		:position="position"
+		:popup-visible="computedPopupVisible"
+		:popup-offset="10"
+		show-arrow
+		:content-class="contentCls"
+		:content-style="computedContentStyle"
+		:arrow-class="arrowCls"
+		:arrow-style="computedArrowStyle"
+		:popup-container="popupContainer"
+		:overflow-show="overflowShow"
+		animation-name="zoom-in-fade-out"
+		auto-fit-transform-origin
+		role="tooltip"
+		:get-target="getTarget"
+		@popup-visible-change="handlePopupVisibleChange"
+	>
+		<slot />
+		<template #content>
+			<slot name="content">{{ viewContent }}</slot>
+		</template>
+	</Trigger>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, nextTick, ref } from 'vue';
+import { getPrefixCls } from '../_utils/global-config';
+import Trigger from '../trigger';
+import type { TriggerPosition } from '../_utils/constant';
+import type { ClassName } from '../_utils/types';
+import type { CSSProperties, PropType } from 'vue';
+
+export default defineComponent({
+	name: 'Tooltip',
+	components: {
+		Trigger,
+	},
+	props: {
+		/**
+		 * @zh 文字气泡是否可见
+		 * @en Whether the tooltip is visible
+		 * @vModel
+		 */
+		popupVisible: {
+			type: Boolean,
+			default: undefined,
+		},
+		/**
+		 * @zh 文字气泡默认是否可见（非受控模式）
+		 * @en Whether the tooltip is visible by default (uncontrolled mode)
+		 */
+		defaultPopupVisible: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * @zh 文字气泡内容
+		 * @en Tooltip content
+		 */
+		content: String,
+		/**
+		 * @zh 弹出位置
+		 * @en Popup position
+		 * @values 'top','tl','tr','bottom','bl','br','left','lt','lb','right','rt','rb'
+		 */
+		position: {
+			type: String as PropType<TriggerPosition>,
+			default: 'top',
+		},
+		/**
+		 * @zh 是否展示为迷你尺寸
+		 * @en Whether to display as a mini size
+		 */
+		mini: {
+			type: Boolean,
+			default: false,
+		},
+		/**
+		 * @zh 弹出框的背景颜色
+		 * @en Background color of the popover
+		 */
+		backgroundColor: {
+			type: String,
+		},
+		/**
+		 * @zh 弹出框内容的类名
+		 * @en The class name of the popup content
+		 */
+		contentClass: {
+			type: [String, Array, Object] as PropType<ClassName>,
+		},
+		/**
+		 * @zh 弹出框内容的样式
+		 * @en The style of the popup content
+		 */
+		contentStyle: {
+			type: Object as PropType<CSSProperties>,
+		},
+		/**
+		 * @zh 弹出框箭头的类名
+		 * @en The class name of the popup arrow
+		 */
+		arrowClass: {
+			type: [String, Array, Object] as PropType<ClassName>,
+		},
+		/**
+		 * @zh 弹出框箭头的样式
+		 * @en The style of the popup arrow
+		 */
+		arrowStyle: {
+			type: Object as PropType<CSSProperties>,
+		},
+		/**
+		 * @zh 弹出框的挂载容器
+		 * @en Mount container for popup
+		 */
+		popupContainer: {
+			type: [String, Object] as PropType<string | HTMLElement>,
+		},
+		/**
+		 * @zh 是否是内部内容超出才展示 Tooltip
+		 */
+		overflowShow: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	emits: {
+		'update:popupVisible': (visible: boolean) => true,
+		/**
+		 * @zh 文字气泡显示状态改变时触发
+		 * @en Emitted when the tooltip display status changes
+		 * @param {boolean} visible
+		 */
+		popupVisibleChange: (visible: boolean) => true,
+	},
+	/**
+	 * @zh 内容
+	 * @en Content
+	 * @slot content
+	 */
+	setup(props, { emit, slots }) {
+		const prefixCls = getPrefixCls('tooltip');
+
+		const _popupVisible = ref(props.defaultPopupVisible);
+		const _content = ref('');
+		const viewContent = computed(() => {
+			return _content.value || props.content;
+		});
+		const computedPopupVisible = computed(() => props.popupVisible ?? _popupVisible.value);
+
+		const handlePopupVisibleChange = (visible: boolean) => {
+			_popupVisible.value = visible;
+			emit('update:popupVisible', visible);
+			emit('popupVisibleChange', visible);
+		};
+
+		const contentCls = computed(() => [`${prefixCls}-content`, props.contentClass, { [`${prefixCls}-mini`]: props.mini }]);
+
+		const computedContentStyle = computed<CSSProperties | undefined>(() => {
+			if (props.backgroundColor || props.contentStyle) {
+				return {
+					backgroundColor: props.backgroundColor,
+					...props.contentStyle,
+				};
+			}
+			return undefined;
+		});
+
+		const arrowCls = computed(() => [`${prefixCls}-popup-arrow`, props.arrowClass]);
+
+		const computedArrowStyle = computed<CSSProperties | undefined>(() => {
+			if (props.backgroundColor || props.arrowStyle) {
+				return {
+					backgroundColor: props.backgroundColor,
+					...props.arrowStyle,
+				};
+			}
+			return undefined;
+		});
+
+		let dynamicTarget: HTMLElement;
+		/**
+		 * 打开
+		 * @param target
+		 * @param content
+		 */
+		const open = (target: Element | EventTarget | null, content) => {
+			if (target) {
+				dynamicTarget = target as HTMLElement;
+			}
+			_content.value = content;
+			handlePopupVisibleChange(true);
+			return nextTick();
+		};
+		/**
+		 * 关掉
+		 */
+		const close = () => {
+			_popupVisible.value = false;
+		};
+
+		const setActivated = (visible: boolean) => {
+			return _popupVisible.value;
+		};
+		const isActivated = () => {
+			return _popupVisible.value;
+		};
+
+		const getTarget = () => dynamicTarget;
+
+		return {
+			viewContent,
+			getTarget,
+			open,
+			close,
+			setActivated,
+			isActivated,
+			prefixCls,
+			computedPopupVisible,
+			contentCls,
+			computedContentStyle,
+			arrowCls,
+			computedArrowStyle,
+			handlePopupVisibleChange,
+		};
+	},
+});
+</script>

@@ -1,0 +1,17 @@
+.vue-quill-editor {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 2px 0;
+	overflow-y: hidden;
+	::v-deep(.ql-container) {
+		max-height: 600px;
+		height: 400px;
+		flex-grow: 1;
+		background-color: #fff;
+		overflow-y: auto;
+	}
+	::v-deep(strong) {
+		font-weight: 700;
+	}
+}
