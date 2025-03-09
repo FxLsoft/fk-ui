@@ -11,9 +11,10 @@
 
 主要涉及技术 vue3 + ts + less + node。
 
-![image](./img/input.jpg)
-
-![image](./img/table.jpg)
+## 部分效果展示
+![image](./imgs/input.jpg)
+## 部分效果展示
+![image](./imgs/table.jpg)
 
 ### 依赖安装
 
